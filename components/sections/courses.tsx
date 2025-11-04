@@ -2,13 +2,35 @@
 
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
-import MagicBento from "@/components/MagicBento";
-import { COURSES_DATA } from "@/lib/courses-data";
+import { CarouselSize } from "../ui/courseCarousel";
+import Image from "next/image";
+import { Card } from "../ui/card";
+import { THEME } from "@/lib/theme";
 
 interface AnimatedElementProps {
   children: React.ReactNode;
   delay: number;
 }
+
+const images = [
+  {
+    src: "/images/ComputerVision.png",
+    alt:"ComVis"
+  },
+  {
+    src: "/images/Webdev.png",
+    alt:"Webdev"
+  },
+  {
+    src: "/images/Iot.png",
+    alt:"Iot"
+  },
+  {
+    src: "/images/Netsec.png",
+    alt:"Netsec"
+  },
+];
+
 
 function AnimatedElement({ children, delay }: AnimatedElementProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -70,10 +92,10 @@ export default function CoursesSection() {
         <AnimatedElement delay={0}>
           <div className="mb-20 text-center md:text-left">
             <div className="flex items-center gap-3 mb-6 md:justify-start justify-center">
-              <div className="w-1 h-10 bg-gradient-to-b from-[#00D9FF] via-[#B3005E] to-[#B3005E]" />
+              <div className="w-1 h-10 bg-[#FF1493]" />
               <span
-                className="text-xs font-pixel text-[#00D9FF] tracking-widest uppercase font-bold"
-                style={{ letterSpacing: "0.3em" }}
+                className="text-xs font-pixel tracking-widest uppercase font-bold"
+                style={{ letterSpacing: "0.3em" , color: THEME.colors.primary}}
               >
                 Featured Courses
               </span>
@@ -81,14 +103,11 @@ export default function CoursesSection() {
 
             <h2
               className="text-3xl md:text-5xl lg:text-6xl font-pixel tracking-tight uppercase leading-tight mb-6"
-              style={{
-                background:
-                  "linear-gradient(135deg, #00D9FF, #B3005E, #FF006E)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                letterSpacing: "0.05em",
-              }}
+             style={{
+                         color:THEME.colors.white,
+                         WebkitTextStroke: `1px ${THEME.colors.primary}`,
+                         letterSpacing: "0.05em",
+                       }}
             >
               Master Tech Skills
             </h2>
@@ -101,70 +120,36 @@ export default function CoursesSection() {
         </AnimatedElement>
 
         {/* MagicBento Grid */}
-        <div className="flex justify-center mb-24 w-full">
-          <div className="w-full max-w-6xl">
-            <MagicBento
-              items={COURSES_DATA}
-              enableStars={true}
-              enableSpotlight={true}
-              enableBorderGlow={true}
-              enableTilt={false}
-              clickEffect={true}
-              enableMagnetism={false}
-              glowColor="0, 217, 255"
-              spotlightRadius={400}
-              textAutoHide={false}
-              particleCount={12}
-              disableAnimations={false}
-            />
-          </div>
+        <div className="justify-center mb-24 w-full hidden md:block">
+          <CarouselSize/>
         </div>
+
+        <div className="gap-2 space-y-4 block md:hidden">
+          {images.map((item, index) => (
+           
+            <Card key={index} className="flex items-center justify-center bg-transparent">
+              <Image width={400} height={200}src={item.src} alt={item.alt} className="rounded-lg"/>
+            </Card>
+          ))}
+        </div>
+       
 
         {/* Bottom CTA Section */}
         <AnimatedElement delay={600}>
           <div className="mt-24 text-center">
-            <p
-              className="text-xs font-pixel text-gray-400 mb-8 tracking-widest uppercase mb-12"
-              style={{ letterSpacing: "0.2em" }}
-            >
-              Level Up Your Skills
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <button
-                className="relative px-14 py-4 font-pixel rounded-xl overflow-hidden group/btn transition-all duration-500 uppercase text-xs tracking-widest hover:scale-105 active:scale-95"
-                style={{
-                  background: "linear-gradient(135deg, #00D9FF, #B3005E)",
-                  color: "#000000",
-                  letterSpacing: "0.15em",
-                  boxShadow:
-                    "0 0 30px #00D9FF60, 0 0 15px #B3005E40, inset 0 0 20px #FFFFFF10",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = `0 0 50px #00D9FFA0, 0 0 25px #B3005EA0, inset 0 0 30px #FFFFFF30`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = `0 0 30px #00D9FF60, 0 0 15px #B3005E40, inset 0 0 20px #FFFFFF10`;
-                }}
-              >
-                <span className="relative z-10">Explore Courses</span>
-              </button>
-
-              <button
-                className="relative px-14 py-4 font-pixel rounded-xl overflow-hidden group/btn transition-all duration-500 uppercase text-xs tracking-widest hover:scale-105 active:scale-95 border border-[#B3005E]/50 hover:border-[#B3005E] text-[#B3005E]"
+            <button  className="relative px-14 py-4 font-pixel rounded-xl overflow-hidden group/btn transition-all duration-500 uppercase text-xs tracking-widest hover:scale-105 active:scale-95 border border-[#B3005E]/50 hover:border-[#B3005E] text-[#B3005E] cursor-pointer"
                 style={{
                   boxShadow: "0 0 20px #B3005E30, inset 0 0 20px #B3005E05",
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = `0 0 40px #B3005E70, inset 0 0 30px #B3005E15`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = `0 0 20px #B3005E30, inset 0 0 20px #B3005E05`;
-                }}
+                >
+              <p
+                className="text-xs font-pixel text-gray-400 tracking-widest uppercase "
+                style={{ letterSpacing: "0.2em" }}
               >
-                <span className="relative z-10">View Syllabus</span>
-              </button>
-            </div>
+                Level Up Your Skills
+              </p>
+            </button>
+
           </div>
         </AnimatedElement>
       </div>

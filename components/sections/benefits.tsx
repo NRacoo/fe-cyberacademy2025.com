@@ -4,6 +4,7 @@ import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import MagicBento from "@/components/MagicBento";
 import { BENEFITS_DATA } from "@/lib/benefits-data";
+import {THEME} from "@/lib/theme"
 
 interface AnimatedElementProps {
   children: React.ReactNode;
@@ -214,14 +215,11 @@ export default function BenefitsSection() {
 
             <h2
               className="text-3xl md:text-5xl lg:text-6xl font-pixel tracking-tight uppercase leading-tight mb-6"
-              style={{
-                background:
-                  "linear-gradient(135deg, #B3005E, #FF006E, #00D9FF)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                letterSpacing: "0.05em",
-              }}
+               style={{
+                                       color:THEME.colors.white,
+                                       WebkitTextStroke: `1px ${THEME.colors.primary}`,
+                                       letterSpacing: "0.05em",
+                                     }}
             >
               Unlock Your Potential
             </h2>

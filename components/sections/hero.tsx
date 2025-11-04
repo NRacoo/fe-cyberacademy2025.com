@@ -25,9 +25,9 @@ export default function Hero() {
       />
 
       {/* Content - Now on Top Layer */}
-      <div className="relative z-50 flex flex-col items-center w-full max-w-4xl">
+      <div className="relative z-0 flex flex-col items-center w-full max-w-4xl">
         <h1
-          className="text-6xl md:text-7xl font-black text-center mb-8 text-balance select-none font-pixel"
+          className="text-5xl md:text-7xl font-black text-center mb-8 text-balance select-none font-pixel"
           style={{
             color: THEME.colors.white,
             WebkitTextStroke: `1px ${THEME.colors.primary}`,
@@ -71,7 +71,7 @@ export default function Hero() {
 
       {/* Gradient Overlay - No Click Blocking */}
       <div
-        className="absolute bottom-0 left-0 w-screen h-32 z-10 pointer-events-none"
+        className="absolute bottom-0 left-0 w-full h-32 z-10 pointer-events-none"
         style={{
           background: `linear-gradient(to top, ${THEME.colors.primary}, ${THEME.colors.secondary}, ${THEME.colors.black})`,
         }}

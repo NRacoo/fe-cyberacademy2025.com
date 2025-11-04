@@ -98,7 +98,7 @@ export default function PDFUploader() {
         {/* Remove button */}
         {file && (
           <CyberButton
-            size="icon"
+            size="sm"
             variant="ghost"
             className="absolute top-2 right-2 h-8 w-8 text-white hover:bg-pink-900 z-20"
             onClick={() => setFile(null)}

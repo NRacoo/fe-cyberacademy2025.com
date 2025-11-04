@@ -49,7 +49,7 @@ export default function MedpartSection() {
       <div className="relative max-w-6xl mx-auto z-10">
         <div className="mb-20 text-center">
           <h2
-            className="text-6xl md:text-7xl font-black text-center mt-4 relative text-balance font-pixel"
+            className="text-4xl md:text-7xl font-black text-center mt-4 relative text-balance font-pixel"
             style={{
               color: THEME.colors.white,
               WebkitTextStroke: `1px ${THEME.colors.primary}`,
