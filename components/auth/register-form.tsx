@@ -4,7 +4,6 @@ import type React from "react";
 import { useState } from "react";
 import Link from "next/link";
 import { AuthFormField } from "./auth-form-field";
-import FileUploaderWithPreview from "@/components/FileUploaderWithPreview";
 
 interface RegisterFormData {
   name: string;
@@ -17,9 +16,13 @@ interface RegisterFormData {
   faculty: string;
   year: string;
   topic: string | null;
+  document: string;
 }
 
 const TOPIC_OPTIONS = ["WebDev", "IoT", "ML", "NetSec"];
+
+const API = process.env.NEXT_PUBLIC_API_URL
+
 
 export default function RegisterForm() {
   const [formData, setFormData] = useState<RegisterFormData>({
@@ -33,7 +36,10 @@ export default function RegisterForm() {
     faculty: "",
     year: "",
     topic: null,
+    document:""
   });
+
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -46,10 +52,45 @@ export default function RegisterForm() {
     setFormData((prev) => ({ ...prev, topic }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Registration Data:", formData);
-    // TODO: Tambahkan logika registrasi yang sebenarnya
+    try {
+      setLoading(true)
+      const res = await fetch(`${API}/api/v1/auth/register`,{
+        method: "POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify(
+          {
+            name:formData.name,
+            nim:formData.nim,
+            className:formData.className,
+            noHp:formData.noHp,
+            gender:formData.gender.toLowerCase(),
+            email:formData.email,
+            major:formData.major,
+            faculty:formData.faculty,
+            year:formData.year,
+            topik:formData.topic,
+            document:formData.document,
+          }
+        ),
+      });
+      setLoading(false)
+      const result = await res.json();
+      if(res.ok){
+        console.log({message:"register berhasil", result});
+        alert("Registrasi berhasil, terima kasih")
+      }else{
+        console.error({message:"error registrasi", error:result})
+        alert(`gagal registrasi ${result.message || "error"}`)
+      }
+    } catch (error) {
+      console.error({message:`error di registrasi ${error}`})
+    }finally{
+      setLoading(false)
+    }
   };
 
   return (
@@ -82,7 +123,7 @@ export default function RegisterForm() {
             id="className"
             type="text"
             name="className"
-            placeholder="e.g., Class A"
+            placeholder="e.g., TT-48"
             value={formData.className}
             onChange={handleInputChange}
           />
@@ -166,9 +207,16 @@ export default function RegisterForm() {
           {/* File Uploader */}
           <div className="space-y-2">
             <label className="block text-white text-sm font-pixel">
-              Document:
-            </label>
-            <FileUploaderWithPreview />
+              </label>
+                <AuthFormField
+              label="Document"
+              id="document"
+              type="text"
+              name="document"
+              placeholder="link Gdrive"
+              value={formData.document}
+              onChange={handleInputChange}
+            />
           </div>
         </div>
       </div>
@@ -198,9 +246,10 @@ export default function RegisterForm() {
       {/* Submit Button */}
       <button
         type="submit"
-        className="mt-4 px-6 py-3 bg-[#FF1493] rounded-lg text-white font-bold hover:bg-[#B3005E] transition shadow-lg font-pixel"
+        className="mt-4 px-6 py-3 bg-[#FF1493] rounded-lg text-white font-bold hover:bg-[#B3005E] transition shadow-lg font-pixel cursor-pointer"
+        disabled={loading}
       >
-        Register
+         {loading ? "Processing..." : "Register"}
       </button>
 
       {/* Link to Login */}

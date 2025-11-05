@@ -25,7 +25,7 @@ export function AuthFormField({
 }: AuthFormFieldProps) {
   return (
     <div className="space-y-2">
-      <label htmlFor={id} className="block text-white text-sm font-orbitron">
+      <label htmlFor={id} className="block text-white text-sm ">
         {label}:
       </label>
       <input

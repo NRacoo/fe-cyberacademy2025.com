@@ -80,14 +80,6 @@ export default function MedpartSection() {
           />
         </div>
       </div>
-
-      {/* Bottom Fade */}
-      <div
-        className="absolute bottom-0 left-0 w-full h-32 z-[1] pointer-events-none"
-        style={{
-          background: `linear-gradient(to top, ${THEME.colors.primary}, ${THEME.colors.secondary}, transparent)`,
-        }}
-      />
     </section>
   );
 }

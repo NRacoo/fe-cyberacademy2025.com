@@ -4,45 +4,103 @@ import type React from "react";
 import { useState } from "react";
 import Link from "next/link";
 import { AuthFormField } from "./auth-form-field";
+import { useRouter } from "next/navigation";
+import { LoginFormField } from "./loginForm-field";
+import Cookies from "js-cookie"
+
+interface LoginFormData {
+  nim:string,
+  password:string
+}
 
 export default function LoginForm() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const router = useRouter();
+  const [formData, setFormData] = useState<LoginFormData>(
+    {
+      nim:"",
+      password:"",
+    }
+  )
+  const API = process.env.NEXT_PUBLIC_API_URL
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Login attempt:", { username, password });
-    // TODO: Tambahkan logika autentikasi yang sebenarnya
+    try {
+      setLoading(true)
+      const res = await fetch(`${API}/api/v1/auth/login`,{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            nim:formData.nim,
+            password:formData.password
+        }),
+      });
+      setLoading(false)
+      const result = await res.json();
+
+      if(!res.ok){
+        console.error({message:"error", data:result})
+        alert("login tidak berhasil")
+      }
+      
+      const {token, payload} = result.data
+      const {id} = payload
+      Cookies.set("token", token, {expires: 7})
+      Cookies.set("userId", id)
+      console.log({message:"login berhasil", data:token})
+      alert("Login berhasil")
+      router.push("/dashboard")
+      
+    } catch (error) {
+      console.log({message:"Internal Server Error", data:error})
+    }finally{
+      setLoading(false)
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 w-full">
+    <form onSubmit={handleSubmit} className="space-y-6 max-w-auto">
       <AuthFormField
         label="Username"
         id="username"
         type="text"
-        name="username"
-        placeholder="Enter your username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        name="nim"
+        placeholder="Enter your nim"
+        value={formData.nim}
+        onChange={handleInputChange}
       />
 
-      <AuthFormField
-        label="Password"
-        id="password"
-        type="password"
-        name="password"
-        placeholder="Enter your password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+      <LoginFormField
+      label="Password"
+      id="password"
+      type="password"
+      name="password"
+      placeholder="enter your password"
+      value={formData.password}
+      onChange={handleInputChange}
       />
 
       {/* Submit Button */}
       <button
         type="submit"
         className="w-full border-2 border-[#B3005E] bg-[#B3005E] text-white px-8 py-3 font-pixel text-base hover:bg-[#FF1493] transition duration-300 mt-8"
+        disabled={loading}
       >
-        Log In
+        {loading ? "Processing..." : "Login"}
       </button>
 
       {/* Links */}

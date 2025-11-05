@@ -10,6 +10,7 @@ export interface StaggeredMenuItem {
   ariaLabel: string;
   link: string;
   isButton?: boolean;
+  action?:() => void;
 }
 export interface StaggeredMenuSocialItem {
   label: string;
@@ -33,7 +34,7 @@ export interface StaggeredMenuProps {
   onMenuClose?: () => void;
 }
 
-export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
+export const StaggeredDashboard: React.FC<StaggeredMenuProps> = ({
   position = "right",
   colors = ["#B19EEF", "#5227FF"],
   items = [],
@@ -543,9 +544,16 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                     className="sm-panel-itemWrap relative overflow-hidden leading-none"
                   >
                     {it.isButton ? (
-                      <a
+                      <button
                         className="sm-panel-item-button relative text-white font-bold text-[1.5rem] cursor-pointer leading-none tracking-[-2px] uppercase transition-all duration-300 ease-out inline-block no-underline pr-[1.4em] py-3 px-6 rounded-none"
-                        href={it.link}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            if(it.action){
+                                it.action();
+                            }else{
+                                window.location.href = it.link
+                            }
+                        }}
                         aria-label={it.ariaLabel}
                         data-index={idx + 1}
                         style={{
@@ -565,7 +573,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                         <span className="sm-panel-itemLabel inline-block [transform-origin:50%_100%] will-change-transform">
                           {it.label}
                         </span>
-                      </a>
+                      </button>
                     ) : (
                       <a
                         className="sm-panel-item relative text-black font-semibold text-[2rem] cursor-pointer leading-none tracking-[-2px] uppercase transition-[background,color] duration-150 ease-linear inline-block no-underline pr-[1.4em]"
@@ -672,4 +680,4 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   );
 };
 
-export default StaggeredMenu;
+export default StaggeredDashboard;

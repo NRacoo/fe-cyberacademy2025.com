@@ -29,11 +29,11 @@ export function AuthLayout({
       />
 
       {/* Container */}
-      <div className="relative z-10 w-full max-w-4xl">
+      <div className="relative z-10 w-full max-w-lg">
         <div className="border-2 border-[#FF1493] bg-black/80 backdrop-blur-md p-8 rounded-2xl shadow-[0_0_30px_#FF1493,inset_0_0_20px_rgba(255,20,147,0.1)] flex flex-col">
           {/* Title */}
           <h1
-            className="text-4xl md:text-5xl font-black mb-6 text-center"
+            className="text-3xl md:text-5xl font-black mb-6 text-center"
             style={{
               color: "white",
               WebkitTextStroke: "1px #B3005E",

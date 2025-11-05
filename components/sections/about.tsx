@@ -4,6 +4,8 @@ import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import TextPressure from "../TextPressure";
 import { THEME } from "@/lib/theme";
+import {motion} from "framer-motion"
+import { useRouter } from "next/navigation";
 
 interface AnimatedElementProps {
   children: React.ReactNode;
@@ -110,8 +112,9 @@ function ProgramCard({
 }
 
 export default function AboutSection() {
+  const router = useRouter()
   return (
-    <section className="min-h-screen bg-black pt-32 pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <section className="min-h-screen bg-black pt-32 pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden" id="about">
       {/* Subtle grid background */}
       <div className="absolute inset-0 opacity-[0.008] pointer-events-none">
         <div
@@ -194,32 +197,26 @@ export default function AboutSection() {
                 transformative cybersecurity programs designed for the modern
                 era.
               </p>
-              <button
-                className="relative px-8 py-3 font-pixel rounded-lg overflow-hidden group/btn transition-all duration-500 uppercase text-[10px] tracking-widest"
-                style={{
-                  background: `linear-gradient(135deg, #00D9FF, ${THEME.colors.primary})`,
-                  color: "#000000",
-                  letterSpacing: "0.15em",
-                }}
-                onMouseEnter={(e) => {
-                  const btn = e.currentTarget;
-                  btn.style.boxShadow = `0 0 30px #00D9FF50, inset 0 0 20px #FFFFFF20`;
-                  btn.style.transform = "scale(1.05)";
-                }}
-                onMouseLeave={(e) => {
-                  const btn = e.currentTarget;
-                  btn.style.boxShadow = "none";
-                  btn.style.transform = "scale(1)";
-                }}
-                onMouseDown={(e) => {
-                  e.currentTarget.style.transform = "scale(0.98)";
-                }}
-                onMouseUp={(e) => {
-                  e.currentTarget.style.transform = "scale(1.05)";
-                }}
-              >
-                <span className="relative z-10">Explore Programs</span>
-              </button>
+            <motion.button
+              onClick={() => router.push("#courses")}
+              className="px-7 py-3 text-sm font-bold tracking-wider
+                         transition-all duration-300 ease-out 
+                         font-pixel relative cursor-pointer
+                         w-full sm:w-auto
+                         animate-pulse-glow 
+                         hover:scale-[1.05] 
+                         hover:bg-[#FF1493] 
+                         hover:shadow-[0_0_40px_#FF1493,0_0_60px_#B3005E]
+                         hover:animate-none
+                         active:scale-95 transform-gpu"
+              style={{
+                color: THEME.colors.white,
+                backgroundColor: THEME.colors.primary,
+                border: `2px solid ${THEME.colors.primary}`,
+              }}
+            >
+              Explores Program
+            </motion.button>
             </div>
           </div>
         </AnimatedElement>
