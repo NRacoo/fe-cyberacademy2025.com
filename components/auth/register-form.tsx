@@ -15,7 +15,7 @@ interface RegisterFormData {
   major: string;
   faculty: string;
   year: string;
-  topic: string | null;
+  topik: string ;
   document: string;
 }
 
@@ -35,7 +35,7 @@ export default function RegisterForm() {
     major: "",
     faculty: "",
     year: "",
-    topic: null,
+    topik: "",
     document:""
   });
 
@@ -48,12 +48,13 @@ export default function RegisterForm() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleTopicSelect = (topic: string) => {
-    setFormData((prev) => ({ ...prev, topic }));
+  const handleTopicSelect = (topik: string) => {
+    setFormData((prev) => ({ ...prev, topik }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log("data", formData)
     try {
       setLoading(true)
       const res = await fetch(`${API}/api/v1/auth/register`,{
@@ -66,13 +67,13 @@ export default function RegisterForm() {
             name:formData.name,
             nim:formData.nim,
             className:formData.className,
+            email:formData.email,
             noHp:formData.noHp,
             gender:formData.gender.toLowerCase(),
-            email:formData.email,
-            major:formData.major,
             faculty:formData.faculty,
             year:formData.year,
-            topik:formData.topic,
+            major:formData.major,
+            topik:formData.topik,
             document:formData.document,
           }
         ),
@@ -232,7 +233,7 @@ export default function RegisterForm() {
               type="button"
               onClick={() => handleTopicSelect(topic)}
               className={`px-4 py-2 rounded-full border font-pixel transition ${
-                formData.topic === topic
+                formData.topik === topic
                   ? "bg-[#FF1493] text-white border-[#FF1493]"
                   : "bg-black/70 text-white border-[#FF1493] hover:bg-black/50"
               }`}

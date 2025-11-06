@@ -150,21 +150,23 @@ export default function DashboardSection() {
             backgroundPosition: "center",
         }}
        /> 
-        <div className="space-y-4 flex flex-col items-center text-center justify-center md:translate-y-1/2">
-          <motion.h1
-            className=" text-2xl md:text-4xl"
-            style={{
-              color: THEME.colors.white,
-              letterSpacing: "0.05em",
-              textShadow: `0 0 10px ${THEME.colors.primary}`,
-            }}
-          >
-            Greeting,{user?.name || "Guest"}
-          </motion.h1>
-          <motion.p className="text-white text-sm text-center md:max-w-4xl">
-            Welcome to Cyber Academy. An immersive program where you will not just learn, but also master essential topics in the cyber world, which we have specially selected and designed for your career success.
-          </motion.p>
-        </div>
+       <div className="border-b border-border/50 md:pt-20">
+            <div className="space-y-4 flex flex-col items-center text-center justify-center">
+            <motion.h1
+                className="text-2xl md:text-4xl"
+                style={{
+                color: THEME.colors.white,
+                letterSpacing: "0.05em",
+                textShadow: `0 0 10px ${THEME.colors.primary}`,
+                }}
+            >
+                Greeting,{user?.name || "Guest"}
+            </motion.h1>
+            <motion.p className="text-white text-sm text-center md:max-w-4xl mb-2">
+                Welcome to Cyber Academy. An immersive program where you will not just learn, but also master essential topics in the cyber world, which we have specially selected and designed for your career success.
+            </motion.p>
+            </div>
+       </div>
 
         <div className="flex flex-col text-center mt-10 md:mt-20 mb-4 space-y-4 items-center justify-center">
             <motion.h1 className="text-white text-2xl md:text-4xl"

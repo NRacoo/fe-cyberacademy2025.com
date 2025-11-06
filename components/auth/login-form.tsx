@@ -61,8 +61,6 @@ export default function LoginForm() {
       const {id} = payload
       Cookies.set("token", token, {expires: 7})
       Cookies.set("userId", id)
-      console.log({message:"login berhasil", data:token})
-      alert("Login berhasil")
       router.push("/dashboard")
       
     } catch (error) {

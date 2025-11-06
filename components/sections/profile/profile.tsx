@@ -77,7 +77,6 @@ export default function ProfileSection(){
                 topik:data.topik,
                 document:data.document
             })
-            console.log("user: ", user)
         } catch (error) {
             console.error("Error fetching profile data:", error);
         }finally{

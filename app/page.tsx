@@ -16,7 +16,6 @@ export default function Home() {
         <AboutSection />
         <BenefitsSection />
         <CoursesSection />
-        {/* <RequirementsSection /> */}
         <MedpartSection />
         </main>
       <Footer/>

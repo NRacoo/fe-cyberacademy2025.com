@@ -7,6 +7,8 @@ import { BookOpen, Clock, Lock, CheckCircle2, ArrowRight, Zap } from "lucide-rea
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
+import { THEME } from "@/lib/theme"
 import Image from "next/image"
 
 interface Modul {
@@ -54,7 +56,6 @@ export default function ModuleSection() {
         const data = result.data
 
         setModuls(data)
-        console.log("Modules:", data)
       } catch (error) {
         console.error("Error fetching module data:", error)
       } finally {
@@ -84,13 +85,54 @@ export default function ModuleSection() {
     })
   }
 
-  if (loading) {
-    return (
-      <section className="min-h-screen flex items-center justify-center text-white">
-        Loading modules...
-      </section>
-    )
-  }
+  if (loading)
+  return (
+    <section className="min-h-screen flex flex-col items-center justify-center bg-black text-white">
+      <motion.div
+        className="relative w-20 h-20 flex items-center justify-center"
+        initial={{ scale: 0 }}
+        animate={{ scale: [0.8, 1.1, 0.8] }}
+        transition={{
+          duration: 1.5,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      >
+        <motion.div
+          className="absolute inset-0 border-4 rounded-full"
+          style={{ borderColor: THEME.colors.primary }}
+          animate={{ rotate: 360 }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+        <motion.div
+          className="w-8 h-8 rounded-full"
+          style={{ backgroundColor: THEME.colors.primary }}
+          animate={{ scale: [1, 1.3, 1] }}
+          transition={{
+            duration: 1.2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      </motion.div>
+      <motion.p
+        className="mt-6 text-sm uppercase tracking-widest"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: [0, 1, 0] }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      >
+        Loading...
+      </motion.p>
+    </section>
+  );
 
   return (
     <section className="min-h-screen py-20 px-4">
@@ -103,22 +145,22 @@ export default function ModuleSection() {
         }}
       />
 
-      <div className="border-b border-border/50 ">
-        <div className="mx-auto max-w-7xl px-6 py-4 sm:px-8">
-          <div className="space-y-4">
-            <div className="rounded-lg bg-primary/10 p-3">
-              <BookOpen className="w-6 h-6 text-white" />
+        <div className="border-b border-border/50 ">
+            <div className="mx-auto max-w-7xl px-6 py-4 sm:px-8">
+            <div className="space-y-4">
+                <div className="rounded-lg bg-primary/10 p-3">
+                <BookOpen className="w-6 h-6 text-white" />
+                </div>
+                <h1 className="text-4xl font-bold text-white text-start">
+                Learning Modules
+                </h1>
             </div>
-            <h1 className="text-4xl font-bold text-white text-start">
-              Learning Modules
-            </h1>
-          </div>
-          <p className="text-sm text-white font-light text-start md:px-1">
-            Expand your knowledge with our curated collection of technical
-            modules and courses.
-          </p>
+            <p className="text-sm text-white font-light text-start md:px-1">
+                Expand your knowledge with our curated collection of technical
+                modules and courses.
+            </p>
+            </div>
         </div>
-      </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mt-8">
        {moduls.map((item) => {
