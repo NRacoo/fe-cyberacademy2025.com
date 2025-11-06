@@ -21,11 +21,6 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
   { label: "About", ariaLabel: "Go to About", link: "#about" },
   { label: "Benefit", ariaLabel: "Go to Benefit", link: "#benefits" },
   { label: "Course", ariaLabel: "Go to Course", link: "#courses" },
-  {
-    label: "Requirement",
-    ariaLabel: "Go to Requirement",
-    link: "#requirements",
-  },
   { label: "Medpart", ariaLabel: "Go to Medpart", link: "#medpart" },
   { label: "Login", ariaLabel: "Go to Login", link: "/login", isButton: true },
 ];

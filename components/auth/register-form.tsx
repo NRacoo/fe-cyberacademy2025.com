@@ -19,7 +19,7 @@ interface RegisterFormData {
   document: string;
 }
 
-const TOPIC_OPTIONS = ["WebDev", "IoT", "ML", "NetSec"];
+const TOPIC_OPTIONS = ["WebDev", "IoT", "ComVis", "NetSec"];
 
 const API = process.env.NEXT_PUBLIC_API_URL
 
@@ -80,6 +80,7 @@ export default function RegisterForm() {
       });
       setLoading(false)
       const result = await res.json();
+      console.log("register", result)
       if(res.ok){
         console.log({message:"register berhasil", result});
         alert("Registrasi berhasil, terima kasih")
@@ -242,6 +243,10 @@ export default function RegisterForm() {
             </button>
           ))}
         </div>
+      </div>
+
+      <div className="p-4 ">
+          <h1 className="text-white ">Pembayaran: BLU / 003274244576 a/n Citra Kusumadewi Sribawono</h1>
       </div>
 
       {/* Submit Button */}
