@@ -4,6 +4,7 @@ import type React from "react";
 import { useState } from "react";
 import Link from "next/link";
 import { AuthFormField } from "./auth-form-field";
+import { useRouter } from "next/navigation";
 
 interface RegisterFormData {
   name: string;
@@ -38,7 +39,7 @@ export default function RegisterForm() {
     topik: "",
     document:""
   });
-
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const handleInputChange = (
@@ -84,10 +85,8 @@ export default function RegisterForm() {
       if(res.ok){
         console.log({message:"register berhasil", result});
         alert("Registrasi berhasil, terima kasih")
-      }else{
-        console.error({message:"error registrasi", error:result})
-        alert(`gagal registrasi ${result.message || "error"}`)
       }
+      router.push("/login")
     } catch (error) {
       console.error({message:`error di registrasi ${error}`})
     }finally{
