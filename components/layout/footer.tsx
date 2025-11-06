@@ -29,14 +29,14 @@ export default function Footer() {
             <div className="space-y-3 text-center lg:text-left py-8">
                 <div className="flex items-center justify-start lg:justify-start">
                     <MapPin className="w-10 md:h-10 md:w-5 h-5 mr-3 font-pixel" />
-                    <span className="text-[10px] md:text-sm font-pixel text-start">
+                    <span className="text-[9px] sm:text-[10px] md:text-sm font-pixel text-start">
                     Telkom University Landmark Tower (13.12) Bandung, Jawa Barat
                     </span>
                 </div>
 
                 <div className="flex items-center justify-start lg:justify-start">
                     <Mail className="w-5 h-5 mr-3 font-pixel" />
-                    <span className="text-sm font-pixel text-start">
+                    <span className="text-[9px]  font-pixel text-start">
                     cpslaboratory@gmail.com
                     </span>
                 </div>
