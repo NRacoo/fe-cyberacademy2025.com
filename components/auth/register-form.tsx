@@ -206,21 +206,21 @@ export default function RegisterForm() {
           />
 
           {/* File Uploader */}
-          <div className="space-y-2">
+        </div>
+      </div>
+      <div className="space-y-2 w-full">
             <label className="block text-white text-sm font-pixel">
               </label>
                 <AuthFormField
-              label="Document"
+              label="Bukti"
               id="document"
               type="text"
               name="document"
-              placeholder="link Gdrive"
+              placeholder="link bukti pembayaran "
               value={formData.document}
               onChange={handleInputChange}
             />
-          </div>
-        </div>
-      </div>
+       </div>
 
       <div className="space-y-2">
         <p className="text-white font-semibold text-sm font-pixel">
