@@ -118,6 +118,9 @@ export default function LoginForm() {
         >
           Back to Home
         </Link>
+        <Link href={"https://docs.google.com/document/d/1EP5IcTOGAV0hm6atr8gXssrkbRwPkZ7_/edit?usp=sharing&ouid=102258087144165933837&rtpof=true&sd=true"} className="block text-[#B3005E] hover:text-[#FF1493] transition duration-300 font-orbitron text-sm">
+          Pemberitahuan Login
+        </Link>
       </div>
     </form>
   );
