@@ -245,7 +245,7 @@ export default function RegisterForm() {
       </div>
 
       <div className="p-4 ">
-          <h1 className="text-white ">Pembayaran: BLU / 003274244576 a/n Citra Kusumadewi Sribawono</h1>
+          <h1 className="text-white ">Pembayaran: Digital BCA/ 003274244576 a/n Citra Kusumadewi Sribawono</h1>
       </div>
 
       {/* Submit Button */}
