@@ -20,7 +20,7 @@ interface RegisterFormData {
   document: string;
 }
 
-const TOPIC_OPTIONS = ["WebDev", "IoT", "ComVis", "NetSec"];
+const TOPIC_OPTIONS = ["WebDev", "IoT", "ComVis"];
 
 const API = process.env.NEXT_PUBLIC_API_URL
 
@@ -244,7 +244,7 @@ export default function RegisterForm() {
         </div>
       </div>
 
-      <p className="font-orbitron text-white px-4">NetSec limited seat are sold, normal price is Rp. 100, 0000. You can join others division for Rp. 75, 000.</p>
+      <p className="font-orbitron text-white px-4">NetSec seat are SOLD. You can join others division LIMITED SEAT for Rp. 75, 000.</p>
 
       <div className="p-4 ">
           <h1 className="text-white text-sm">Pembayaran: BLU Digital BCA/ 003274244576 a/n Citra Kusumadewi Sribawono</h1>
