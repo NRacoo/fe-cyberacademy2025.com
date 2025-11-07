@@ -20,7 +20,7 @@ interface RegisterFormData {
   document: string;
 }
 
-const TOPIC_OPTIONS = ["WebDev", "ComVis"];
+const TOPIC_OPTIONS = ["WebDev", "ComVis", "IoT"];
 
 const API = process.env.NEXT_PUBLIC_API_URL
 
