@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation"; // pakai router
 import Cookies from "js-cookie";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import Link from "next/link";
 
 interface UserData{
   id:string;
@@ -217,7 +218,7 @@ export default function DashboardSection() {
                 </AccordionItem>
             </Accordion>
         </div>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center flex-col space-y-4">
             <motion.button
               onClick={handleGetStarted}
               className="px-7 py-3 text-base font-bold tracking-wider
@@ -238,6 +239,28 @@ export default function DashboardSection() {
             >
              View Module
             </motion.button>
+            <Link href={"https://chat.whatsapp.com/C0QC1P2ZDDu6H8aczB6kfM"} className="w-full sm:w-auto">
+              <motion.button
+                onClick={handleGetStarted}
+                className="px-7 py-3 text-base font-bold tracking-wider
+                          transition-all duration-300 ease-out 
+                          font-pixel relative cursor-pointer
+                          w-full sm:w-auto
+                          animate-pulse-glow 
+                          hover:scale-[1.05] 
+                          hover:bg-[#FF1493] 
+                          hover:shadow-[0_0_40px_#FF1493,0_0_60px_#B3005E]
+                          hover:animate-none
+                          active:scale-95 transform-gpu"
+                style={{
+                  color: THEME.colors.white,
+                  backgroundColor: THEME.colors.primary,
+                  border: `2px solid ${THEME.colors.primary}`,
+                }}
+              >
+              Community Group
+              </motion.button>
+            </Link>
         </div>
     
     </section>
