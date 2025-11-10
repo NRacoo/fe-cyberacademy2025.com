@@ -42,8 +42,11 @@ export default function DashboardSection() {
   });
   const api = process.env.NEXT_PUBLIC_API_URL;
   const router = useRouter();
-   const handleGetStarted = () => {
+  const handleGetStarted = () => {
     router.push("/dashboard/module");
+  };
+  const handleGet = () => {
+    router.push("https://chat.whatsapp.com/C0QC1P2ZDDu6H8aczB6kfM");
   };
 
    useEffect(() => {
@@ -241,7 +244,7 @@ export default function DashboardSection() {
             </motion.button>
             <Link href={"https://chat.whatsapp.com/C0QC1P2ZDDu6H8aczB6kfM"} className="w-full sm:w-auto">
               <motion.button
-                onClick={handleGetStarted}
+                onClick={handleGet}
                 className="px-7 py-3 text-base font-bold tracking-wider
                           transition-all duration-300 ease-out 
                           font-pixel relative cursor-pointer
