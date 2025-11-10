@@ -20,7 +20,7 @@ interface RegisterFormData {
   document: string;
 }
 
-const TOPIC_OPTIONS = ["WebDev", "ComVis", "IoT"];
+const TOPIC_OPTIONS = ["WebDev", "ComVis"];
 
 const API = process.env.NEXT_PUBLIC_API_URL
 
@@ -244,7 +244,7 @@ export default function RegisterForm() {
         </div>
       </div>
 
-      <p className="font-orbitron text-white px-4">IoT & WebDev LIMITED SEAT are SOLD, back to normal price Rp. 100, 000. You can join ComVis division LIMITED SEAT for Rp. 75, 000.</p>
+      <p className="font-orbitron text-white px-4">ComVis & WebDev LIMITED SEAT are SOLD, back to normal price Rp. 100, 000.</p>
 
       <div className="p-4 ">
           <h1 className="text-white text-sm">Pembayaran: BLU Digital BCA/ 003274244576 a/n Citra Kusumadewi Sribawono</h1>
