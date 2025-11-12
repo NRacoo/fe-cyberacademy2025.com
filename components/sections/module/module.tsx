@@ -69,7 +69,7 @@ export default function ModuleSection() {
   const getStatusConfig = (status: string) => {
   const configs: Record<string, { label: string; color: string; icon: any }> = {
     COMINGSOON: { label: "Coming Soon", color: "bg-amber-500/20 text-amber-600", icon: Clock },
-    AVAILABLE: { label: "Available", color: "bg-emerald-500/20 text-emerald-600", icon: CheckCircle2 },
+    ONGOING: { label: "Available", color: "bg-emerald-500/20 text-emerald-600", icon: CheckCircle2 },
     LOCKED: { label: "Locked", color: "bg-slate-500/20 text-slate-600", icon: Lock },
   }
   return configs[status] || configs.COMINGSOON
@@ -85,6 +85,12 @@ export default function ModuleSection() {
     })
   }
 
+  const topicImages: Record<string, string> = {
+    NetSec: "/topics/NetSec.png",
+    WebDev: "/topics/WebDev.png",
+    ComVis: "/topics/ComVis.png",
+    IoT: "/topics/IoT.png",
+  };
   if (loading)
   return (
     <section className="min-h-screen flex flex-col items-center justify-center bg-black text-white">
@@ -167,27 +173,33 @@ export default function ModuleSection() {
         const statusConfig = getStatusConfig(item.status)
         const StatusIcon = statusConfig.icon
         const isComingSoon = item.status === "COMINGSOON"
+        const topicImage = topicImages[item.topik]
         
         return (
             <div key={item.id} className="group relative">
                 <Card className="bg-black">
-                    <div className="relative aspect-video overflow-hidden px-4">
-                        <Image src={item.image || "Gambar tidak tersedia"}
-                        width={300}
-                        height={300}
-                        alt="gambar"
-                        unoptimized
-                        className="object-cover w-full h-full"/>
-                    </div>
+                    {topicImage ? (
+                      <div className="relative aspect-video overflow-hidden px-4">
+                        <Image
+                          src={topicImage}
+                          width={300}
+                          height={300}
+                          alt={item.topik}
+                          unoptimized
+                          className="object-cover w-full h-full"
+                        />
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-center aspect-video bg-primary/10 text-white text-sm font-medium">
+                        {item.topik || "No Topic"}
+                      </div>
+                    )}
                     <div className="flex items-center justify-start gap-2 px-6 pt-4">
                         <div className="flex gap-2 flex-wrap">
                             <Badge className={`${statusConfig.color} border-0 gap-2 font-medium`}>
                             <StatusIcon className="h-3 w-3" />
                             {statusConfig.label}
                             </Badge>
-                            {!isComingSoon && (
-                            <Zap className="h-5 w-5 text-amber-600" />
-                            )}
                         </div>
                         <div className="space-y-2">
                             <Badge variant="outline" className="border-primary/30 bg-white">
@@ -201,7 +213,7 @@ export default function ModuleSection() {
                       <h3 className="text-xl  font-bold text-white transition-colors">
                         {item.name}
                       </h3>
-                      <p className="text-sm font-orbitron">{item.description}</p>
+                      <p className="text-sm font-orbitron text-white">{item.description}</p>
                     </div>
 
                     {/* Available At */}
