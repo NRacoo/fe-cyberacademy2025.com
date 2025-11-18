@@ -59,8 +59,10 @@ export default function LoginForm() {
       
       const {token, payload} = result.data
       const {id} = payload
+      const {topik} = payload
       Cookies.set("token", token, {expires: 7})
       Cookies.set("userId", id)
+      Cookies.set("topik", topik)
       router.push("/dashboard")
       
     } catch (error) {

@@ -10,6 +10,7 @@ export interface NavigationItem {
 export const NAVIGATION_DASHBOARD_ITEMS : NavigationItem[] = [
   { label: "Dashboard", ariaLabel: "Go to Dashboard", link: "/dashboard" },
   { label: "Module", ariaLabel: "Go to Modul", link: "/dashboard/module" },
+  { label: "Task", ariaLabel: "Go to task", link: "/dashboard/task" },
   { label: "Profile", ariaLabel: "Go to profile", link: "/dashboard/profile" },
 ];
 

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import Cookies from "js-cookie"
-import { BookOpen, Clock, Lock, CheckCircle2, ArrowRight, Zap } from "lucide-react"
+import { BookOpen, Clock, Lock, CheckCircle2,} from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -161,7 +161,7 @@ export default function ModuleSection() {
                 Learning Modules
                 </h1>
             </div>
-            <p className="text-sm text-white font-light text-start md:px-1">
+            <p className="text-sm text-white font-light text-start pt-2 md:px-1">
                 Expand your knowledge with our curated collection of technical
                 modules and courses.
             </p>
