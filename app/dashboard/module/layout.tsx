@@ -8,7 +8,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
 	return (
 		<div>
 			{children}
-    </div>
+    	</div>
 	);
 };
 

@@ -233,7 +233,7 @@ export default function DashboardSection() {
                          hover:bg-[#FF1493] 
                          hover:shadow-[0_0_40px_#FF1493,0_0_60px_#B3005E]
                          hover:animate-none
-                         active:scale-95 transform-gpu"
+                         active:scale-95 transform-gpu z-10"
               style={{
                 color: THEME.colors.white,
                 backgroundColor: THEME.colors.primary,
