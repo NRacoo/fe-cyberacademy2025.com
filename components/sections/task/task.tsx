@@ -14,6 +14,9 @@ interface Task{
     file: string
     deadline: string
     topik: string
+    isSubmitted:boolean,
+    submissionsFile?:string,
+    submissionsStatus?:string,
 }
 
 
