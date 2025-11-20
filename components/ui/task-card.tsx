@@ -14,13 +14,15 @@ interface TaskCardProps {
     file: string
     deadline: string
     topik: string
+    isSubmitted:boolean,
+    submissionsFile?:string,
+    submissionsStatus?:string,
   }
   onSubmit: (taskId: string, file: string) => Promise<void>
 }
 
 export function TaskCard({ task, onSubmit }: TaskCardProps) {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(task.isSubmitted || task.submissionsStatus === "CLOSED")
   const [submissionFile, setSubmissionFile] = useState("")   
   const [openDialog, setOpenDialog] = useState(false)  
 
@@ -39,7 +41,6 @@ export function TaskCard({ task, onSubmit }: TaskCardProps) {
   const isOverdue = new Date(task.deadline) < new Date()
 
   const handleSubmit = async () => {
-    setIsSubmitting(true)
     try {
       await onSubmit(task.id, submissionFile)
       setIsSubmitted(true)
@@ -47,7 +48,7 @@ export function TaskCard({ task, onSubmit }: TaskCardProps) {
     } catch (error) {
       console.error("Error submitting task:", error)
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitted(false)
     }
   }
 
@@ -117,8 +118,8 @@ export function TaskCard({ task, onSubmit }: TaskCardProps) {
                 </div>
                 <DialogFooter className="sm:justify-start">
                     <DialogClose asChild>
-                        <Button variant={"secondary"} onClick={handleSubmit} disabled={isSubmitting}>
-                           {isSubmitting ? "Submitting..." : "Submit"}
+                        <Button variant={"secondary"} onClick={handleSubmit} disabled={isSubmitted}>
+                           {isSubmitted ? "Submitting..." : "Submit"}
                         </Button>
                     </DialogClose>
                 </DialogFooter>
