@@ -22,7 +22,7 @@ interface TaskCardProps {
 }
 
 export function TaskCard({ task, onSubmit }: TaskCardProps) {
-  const [isSubmitted, setIsSubmitted] = useState(task.isSubmitted || task.submissionsStatus === "CLOSED")
+  const [isSubmitted, setIsSubmitted] = useState(task.isSubmitted || task.submissionsStatus === "DONE")
   const [submissionFile, setSubmissionFile] = useState("")   
   const [openDialog, setOpenDialog] = useState(false)  
 

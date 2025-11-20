@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import {motion} from "framer-motion"
 import { BookOpen } from "lucide-react"
 import { TaskCard } from "@/components/ui/task-card"
+import { THEME } from "@/lib/theme"
 
 
 interface Task{
@@ -89,7 +90,54 @@ export default function TaskSection (){
         }
     }
 
-
+    if (loading)
+      return (
+        <section className="min-h-screen flex flex-col items-center justify-center bg-black text-white">
+          <motion.div
+            className="relative w-20 h-20 flex items-center justify-center"
+            initial={{ scale: 0 }}
+            animate={{ scale: [0.8, 1.1, 0.8] }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <motion.div
+              className="absolute inset-0 border-4 rounded-full"
+              style={{ borderColor: THEME.colors.primary }}
+              animate={{ rotate: 360 }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            />
+            <motion.div
+              className="w-8 h-8 rounded-full"
+              style={{ backgroundColor: THEME.colors.primary }}
+              animate={{ scale: [1, 1.3, 1] }}
+              transition={{
+                duration: 1.2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          </motion.div>
+          <motion.p
+            className="mt-6 text-sm uppercase tracking-widest"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 1, 0] }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            Loading...
+          </motion.p>
+        </section>
+      );
 
     return (
         <section className="min-h-screen py-20 px-4">
