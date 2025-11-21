@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./dialog"
 import { Input } from "./input"
+import LinearIndeterminate from "./progress"
 
 interface TaskCardProps {
   task: {
@@ -22,7 +23,8 @@ interface TaskCardProps {
 }
 
 export function TaskCard({ task, onSubmit }: TaskCardProps) {
-  const [isSubmitted, setIsSubmitted] = useState(task.isSubmitted || task.submissionsStatus === "DONE")
+  const [isSubmitted, setIsSubmitted] = useState(task.isSubmitted)
+  const [isLoading, setIsloading] = useState(false)
   const [submissionFile, setSubmissionFile] = useState("")   
   const [openDialog, setOpenDialog] = useState(false)  
 
@@ -43,12 +45,13 @@ export function TaskCard({ task, onSubmit }: TaskCardProps) {
   const handleSubmit = async () => {
     try {
       await onSubmit(task.id, submissionFile)
+      setIsloading(true)
       setIsSubmitted(true)
       setOpenDialog(false)
     } catch (error) {
       console.error("Error submitting task:", error)
-    } finally {
-      setIsSubmitted(false)
+    }finally{
+      setIsloading(false)
     }
   }
 
@@ -119,7 +122,7 @@ export function TaskCard({ task, onSubmit }: TaskCardProps) {
                 <DialogFooter className="sm:justify-start">
                     <DialogClose asChild>
                         <Button variant={"secondary"} onClick={handleSubmit} disabled={isSubmitted}>
-                           {isSubmitted ? "Submitting..." : "Submit"}
+                           {isLoading ? <LinearIndeterminate/> : "Submit"}
                         </Button>
                     </DialogClose>
                 </DialogFooter>
