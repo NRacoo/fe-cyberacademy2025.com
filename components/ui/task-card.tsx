@@ -22,11 +22,29 @@ interface TaskCardProps {
   onSubmit: (taskId: string, file: string) => Promise<void>
 }
 
+function getWibDeadline(deadline: string) {
+   const utc = new Date(deadline)
+
+  // konversi ke WIB
+  const wib = new Date(utc.getTime() + 7 * 60 * 60 * 1000)
+
+  // set ke 00:00 WIB
+  wib.setHours(0,0,0,0)
+
+  return wib
+}
+
+
+
 export function TaskCard({ task, onSubmit }: TaskCardProps) {
   const [isSubmitted, setIsSubmitted] = useState(task.isSubmitted)
   const [isLoading, setIsloading] = useState(false)
   const [submissionFile, setSubmissionFile] = useState("")   
   const [openDialog, setOpenDialog] = useState(false)  
+  const deadlineDate = getWibDeadline(task.deadline)
+  console.log("deadline raw:", task.deadline)
+  console.log("deadline parsed:",getWibDeadline(task.deadline))
+  console.log("local now:", new Date())
 
   const formatDate = (dateString: string) => {
     try {
@@ -40,7 +58,7 @@ export function TaskCard({ task, onSubmit }: TaskCardProps) {
     }
   }
 
-  const isOverdue = new Date(task.deadline) < new Date()
+  const isOverdue = deadlineDate ? deadlineDate < new Date() : false
 
   const handleSubmit = async () => {
     try {
@@ -90,7 +108,6 @@ export function TaskCard({ task, onSubmit }: TaskCardProps) {
               </a>
             </div>
           )}
-
           <div className="flex items-center gap-2 text-sm">
             <Clock className="w-4 h-4 text-muted-foreground shrink-0" />
             <span className={isOverdue ? "text-destructive font-medium" : "text-muted-foreground"}>
@@ -106,8 +123,8 @@ export function TaskCard({ task, onSubmit }: TaskCardProps) {
             if (!isSubmitted) setOpenDialog(open)
         } }>
             <DialogTrigger asChild>
-                <Button variant={"outline"}>
-                    {isSubmitted ? "Submitted" : "Add Task"}
+                <Button variant={"outline"} disabled={isOverdue}>
+                    {isSubmitted ? "Submitted" : isOverdue ? "Overdue" : "Add Task"}
                 </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-md">
@@ -121,8 +138,8 @@ export function TaskCard({ task, onSubmit }: TaskCardProps) {
                 </div>
                 <DialogFooter className="sm:justify-start">
                     <DialogClose asChild>
-                        <Button variant={"secondary"} onClick={handleSubmit} disabled={isSubmitted}>
-                           {isLoading ? <LinearIndeterminate/> : "Submit"}
+                        <Button variant={"secondary"} onClick={handleSubmit} disabled={isSubmitted || isOverdue}>
+                           {isLoading ? <LinearIndeterminate/> : isOverdue ? "Overdue" : "Submit"}
                         </Button>
                     </DialogClose>
                 </DialogFooter>
